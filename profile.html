@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en" class="dark" data-color="violet">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pilot Profile — Pulse Relay</title>
+    
+    <!-- External Dependencies: Tailwind CSS & Phosphor Icons -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ================= COLOR THEMES (CSS VARIABLES) ================= */
+        :root, [data-color="violet"] {
+            --brand-50-rgb: 245 243 255;
+            --brand-100-rgb: 237 233 254;
+            --brand-400-rgb: 167 139 250;
+            --brand-500-rgb: 139 92 246;
+            --brand-600-rgb: 124 58 237;
+            --brand-700-rgb: 109 40 217;
+            --brand-800-rgb: 91 33 182;
+            --brand-900-rgb: 76 29 149;
+
+            --nebula-1: #3d147a;
+            --nebula-2: #250f4a;
+            --nebula-3: #120822;
+            --nebula-light-1: #ede9fe;
+            --nebula-light-2: #f5f3ff;
+            --banner-grad-1: #2e1065;
+            --banner-grad-2: #4c1d95;
+            --banner-grad-3: #1e1b4b;
+        }
+
+        [data-color="pink"] {
+            --brand-50-rgb: 253 242 248;
+            --brand-100-rgb: 252 231 243;
+            --brand-400-rgb: 244 114 182;
+            --brand-500-rgb: 236 72 153;
+            --brand-600-rgb: 219 39 119;
+            --brand-700-rgb: 190 24 93;
+            --brand-800-rgb: 157 23 77;
+            --brand-900-rgb: 131 24 67;
+
+            --nebula-1: #5b0e3e;
+            --nebula-2: #380826;
+            --nebula-3: #180310;
+            --nebula-light-1: #fce7f3;
+            --nebula-light-2: #fdf2f8;
+            --banner-grad-1: #700a42;
+            --banner-grad-2: #9d174d;
+            --banner-grad-3: #4a0429;
+        }
+
+        [data-color="red"] {
+            --brand-50-rgb: 254 242 242;
+            --brand-100-rgb: 254 226 226;
+            --brand-400-rgb: 248 113 113;
+            --brand-500-rgb: 239 68 68;
+            --brand-600-rgb: 220 38 38;
+            --brand-700-rgb: 185 28 28;
+            --brand-800-rgb: 153 27 27;
+            --brand-900-rgb: 127 29 29;
+
+            --nebula-1: #601212;
+            --nebula-2: #3c0909;
+            --nebula-3: #1a0404;
+            --nebula-light-1: #fee2e2;
+            --nebula-light-2: #fef2f2;
+            --banner-grad-1: #7f1d1d;
+            --banner-grad-2: #991b1b;
+            --banner-grad-3: #450a0a;
+        }
+
+        [data-color="green"] {
+            --brand-50-rgb: 236 253 245;
+            --brand-100-rgb: 209 250 229;
+            --brand-400-rgb: 52 211 153;
+            --brand-500-rgb: 16 185 129;
+            --brand-600-rgb: 5 150 105;
+            --brand-700-rgb: 4 120 87;
+            --brand-800-rgb: 6 95 70;
+            --brand-900-rgb: 6 78 59;
+
+            --nebula-1: #0d4a34;
+            --nebula-2: #082f21;
+            --nebula-3: #03140e;
+            --nebula-light-1: #d1fae5;
+            --nebula-light-2: #ecfdf5;
+            --banner-grad-1: #064e3b;
+            --banner-grad-2: #065f46;
+            --banner-grad-3: #022c22;
+        }
+
+        [data-color="blue"] {
+            --brand-50-rgb: 239 246 255;
+            --brand-100-rgb: 219 234 254;
+            --brand-400-rgb: 96 165 250;
+            --brand-500-rgb: 59 130 246;
+            --brand-600-rgb: 37 99 235;
+            --brand-700-rgb: 29 78 216;
+            --brand-800-rgb: 30 64 175;
+            --brand-900-rgb: 30 58 138;
+
+            --nebula-1: #10326e;
+            --nebula-2: #0b2046;
+            --nebula-3: #040c1c;
+            --nebula-light-1: #dbeafe;
+            --nebula-light-2: #eff6ff;
+            --banner-grad-1: #1e3a8a;
+            --banner-grad-2: #1e40af;
+            --banner-grad-3: #0f172a;
+        }
+
+        [data-color="amber"] {
+            --brand-50-rgb: 255 251 235;
+            --brand-100-rgb: 254 243 199;
+            --brand-400-rgb: 251 191 36;
+            --brand-500-rgb: 245 158 11;
+            --brand-600-rgb: 217 119 6;
+            --brand-700-rgb: 180 83 9;
+            --brand-800-rgb: 146 64 14;
+            --brand-900-rgb: 120 53 15;
+
+            --nebula-1: #5e330a;
+            --nebula-2: #3d2005;
+            --nebula-3: #1c0e02;
+            --nebula-light-1: #fef3c7;
+            --nebula-light-2: #fffbeb;
+            --banner-grad-1: #78350f;
+            --banner-grad-2: #92400e;
+            --banner-grad-3: #291202;
+        }
+
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .dark body {
+            background: radial-gradient(ellipse at 50% 20%, var(--nebula-1) 0%, var(--nebula-2) 50%, var(--nebula-3) 100%);
+            color: #f1f0f5;
+        }
+        html:not(.dark) body {
+            background: radial-gradient(ellipse at 50% 20%, var(--nebula-light-1) 0%, var(--nebula-light-2) 50%, #f1f5f9 100%);
+            color: #1e1b4b;
+        }
+
+        .profile-banner-grad {
+            background: linear-gradient(135deg, var(--banner-grad-1) 0%, var(--banner-grad-2) 50%, var(--banner-grad-3) 100%);
+        }
+
+        .profile-scroll::-webkit-scrollbar { width: 5px; }
+        .profile-scroll::-webkit-scrollbar-track { background: transparent; }
+        .profile-scroll::-webkit-scrollbar-thumb { background-color: rgba(255, 255, 255, 0.15); border-radius: 9999px; }
+        html:not(.dark) .profile-scroll::-webkit-scrollbar-thumb { background-color: rgb(var(--brand-600-rgb) / 0.2); }
+    </style>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    },
+                    colors: {
+                        brand: {
+                            50: 'rgb(var(--brand-50-rgb) / <alpha-value>)',
+                            100: 'rgb(var(--brand-100-rgb) / <alpha-value>)',
+                            400: 'rgb(var(--brand-400-rgb) / <alpha-value>)',
+                            500: 'rgb(var(--brand-500-rgb) / <alpha-value>)',
+                            600: 'rgb(var(--brand-600-rgb) / <alpha-value>)',
+                            700: 'rgb(var(--brand-700-rgb) / <alpha-value>)',
+                            800: 'rgb(var(--brand-800-rgb) / <alpha-value>)',
+                            900: 'rgb(var(--brand-900-rgb) / <alpha-value>)'
+                        }
+                    }
+                }
+            }
+        };
+
+        // Bootstrap theme mode immediately
+        const savedTheme = localStorage.getItem('pulse-theme-mode') || 'dark';
+        if (savedTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        // Bootstrap color palette immediately
+        const savedColor = localStorage.getItem('pulse-color-theme') || 'violet';
+        document.documentElement.setAttribute('data-color', savedColor);
+    </script>
+</head>
+<body class="min-h-screen flex flex-col antialiased select-none">
+
+    <!-- Top Navigation Header -->
+    <header class="w-full bg-white/75 dark:bg-[#150d26]/80 backdrop-blur-md border-b border-slate-200/80 dark:border-white/5 h-16 flex items-center px-4 sm:px-8 justify-between sticky top-0 z-50 transition-colors">
+        <div class="flex items-center gap-3">
+            <button onclick="goBackToMainApp()" class="p-2 rounded-xl text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-white/10 transition-colors" title="Back to Chat Hub">
+                <i class="ph-bold ph-arrow-left text-xl"></i>
+            </button>
+            <div class="flex items-center gap-2.5 cursor-pointer" onclick="goBackToMainApp()">
+                <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-brand-700 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-brand-700/30">
+                    <i class="ph-fill ph-broadcast text-lg"></i>
+                </div>
+                <span class="font-extrabold text-base tracking-tight text-slate-900 dark:text-white">Pulse<span class="text-brand-600 dark:text-brand-400">Relay</span></span>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+            <!-- Theme Toggle Button -->
+            <button onclick="toggleThemeMode()" class="w-9 h-9 rounded-xl flex items-center justify-center bg-slate-200/70 dark:bg-white/10 hover:bg-slate-300 dark:hover:bg-white/15 text-slate-700 dark:text-slate-300 transition-all group" title="Toggle Theme">
+                <i id="profile-theme-sun" class="ph-bold ph-sun text-amber-400 text-base hidden dark:block group-hover:rotate-45 transition-transform"></i>
+                <i id="profile-theme-moon" class="ph-bold ph-moon text-brand-700 text-base block dark:hidden group-hover:-rotate-12 transition-transform"></i>
+            </button>
+
+            <!-- Color Palette Switcher -->
+            <div class="relative">
+                <button onclick="toggleColorPalettePopover()" id="btn-profile-palette" class="w-9 h-9 rounded-xl flex items-center justify-center bg-slate-200/70 dark:bg-white/10 hover:bg-slate-300 dark:hover:bg-white/15 text-slate-700 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 transition-all group" title="Choose Color Accent">
+                    <i class="ph-bold ph-palette text-base group-hover:rotate-12 transition-transform"></i>
+                </button>
+
+                <!-- Floating Palette Popover Tray -->
+                <div id="profile-palette-popover" class="hidden absolute top-12 right-0 bg-white/95 dark:bg-[#160d26]/95 backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-2xl shadow-2xl p-3 z-50 w-52" onclick="event.stopPropagation()">
+                    <div class="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-white/10 mb-2">
+                        <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+                            <i class="ph-fill ph-paint-brush-broad text-brand-600 dark:text-brand-400"></i> Accent Theme
+                        </span>
+                        <button onclick="toggleColorPalettePopover()" class="text-slate-400 hover:text-slate-700 dark:hover:text-white text-xs">
+                            <i class="ph-bold ph-x"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-1" id="profile-palette-choices-list">
+                        <!-- Populated via JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="goBackToMainApp()" class="px-3.5 py-1.5 rounded-xl bg-brand-500/10 dark:bg-white/10 hover:bg-brand-500/20 dark:hover:bg-white/15 text-xs font-bold text-slate-800 dark:text-white transition-all flex items-center gap-1.5 border border-brand-500/20 dark:border-white/10">
+                <i class="ph-fill ph-chat-circle-dots text-brand-600 dark:text-brand-400 text-sm"></i>
+                <span>Open Messenger</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-grow flex items-center justify-center p-4 sm:p-6 md:p-8">
+        <div class="bg-white/90 dark:bg-[#160e26]/90 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 rounded-[32px] shadow-2xl max-w-lg w-full overflow-hidden transition-all relative">
+            
+            <!-- Banner Cover with Dynamic Palette Gradient -->
+            <div class="h-36 sm:h-44 profile-banner-grad relative overflow-hidden transition-colors">
+                <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.18),transparent)]"></div>
+                <div class="absolute inset-0 bg-black/25"></div>
+                
+                <div class="absolute top-3 right-3 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-mono text-white font-bold uppercase tracking-wider flex items-center gap-1.5 z-10 border border-white/15">
+                    <span id="user-status-indicator" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span id="user-status-text">Verified Pilot</span>
+                </div>
+            </div>
+
+            <!-- Profile Content Body -->
+            <div class="px-6 pb-6 relative">
+                
+                <!-- Centered Profile Avatar -->
+                <div class="flex justify-center -mt-16 sm:-mt-20 mb-3 relative z-20">
+                    <div class="relative">
+                        <div class="p-1 bg-white dark:bg-[#160e26] rounded-full shadow-2xl">
+                            <div id="profile-avatar" class="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-gradient-to-tr from-brand-700 via-brand-800 to-indigo-800 text-white font-extrabold text-4xl sm:text-5xl flex items-center justify-center uppercase shadow-inner ring-4 ring-brand-500/30 transition-all">
+                                ?
+                            </div>
+                        </div>
+                        <div id="blocked-badge" class="hidden absolute bottom-1.5 right-1.5 bg-rose-600 text-white p-2 rounded-full shadow-lg border-2 border-white dark:border-[#160e26] z-30" title="User is Blocked">
+                            <i class="ph-fill ph-prohibit text-base"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Centered Name & Callsign -->
+                <div class="text-center mb-4">
+                    <div class="flex items-center justify-center gap-1.5">
+                        <h1 id="profile-display-name" class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">Loading Pilot...</h1>
+                        <i class="ph-fill ph-seal-check text-brand-600 dark:text-brand-400 text-xl" title="Verified Pilot"></i>
+                    </div>
+                    <p id="profile-handle" class="text-xs font-mono font-semibold text-slate-500 dark:text-slate-400 mt-0.5">@pilot_code</p>
+                </div>
+
+                <!-- Bio Summary Card -->
+                <div class="mb-5 bg-slate-100/80 dark:bg-white/5 border border-slate-200/80 dark:border-white/5 rounded-2xl p-4 text-center">
+                    <p id="profile-bio-text" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 whitespace-pre-line leading-relaxed font-medium">
+                        ✨ Member of Pulse Relay
+                        💬 Real-time Communication & Messaging
+                        📍 Active Community Member
+                    </p>
+                    
+                    <div id="profile-bio-link-container" class="mt-2.5 pt-2 border-t border-slate-200 dark:border-white/5 flex items-center justify-center gap-1.5 text-xs text-brand-600 dark:text-brand-400 font-semibold">
+                        <i class="ph-bold ph-link text-sm"></i>
+                        <a id="profile-bio-link" href="#" target="_blank" class="hover:underline truncate max-w-[240px]">pulserelay.mesh/profile</a>
+                    </div>
+                </div>
+
+                <!-- Direct Action Buttons Row -->
+                <div class="flex items-center justify-center gap-2.5 mb-6">
+                    <button onclick="startDirectChat()" id="btn-dm-user" class="flex-1 py-2.5 px-4 bg-black hover:bg-neutral-800 text-white rounded-xl text-xs font-bold transition-all shadow-md shadow-black/40 border border-white/15 flex items-center justify-center gap-2 active:scale-95">
+                        <i class="ph-bold ph-paper-plane-tilt text-sm"></i>
+                        <span id="dm-btn-text">Send Transmission</span>
+                    </button>
+                    
+                    <button onclick="toggleBlockUser()" id="btn-block-toggle" class="px-4 py-2.5 rounded-xl text-xs font-bold transition-all border border-rose-200 dark:border-rose-900/50 bg-rose-50 dark:bg-rose-950/30 text-rose-600 dark:text-rose-400 hover:bg-rose-600 hover:text-white dark:hover:bg-rose-600 flex items-center justify-center gap-1.5 active:scale-95">
+                        <i id="block-icon" class="ph-bold ph-prohibit text-sm"></i>
+                        <span id="block-btn-text">Block</span>
+                    </button>
+                </div>
+
+                <!-- Grid Details: Pilot ID & Mail Address -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                    
+                    <!-- 6-Digit Pilot ID -->
+                    <div class="p-3.5 rounded-2xl bg-slate-100/80 dark:bg-white/5 border border-slate-200/80 dark:border-white/5">
+                        <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 text-[10px] font-mono font-bold uppercase tracking-wider mb-1">
+                            <span>Pilot ID</span>
+                            <i class="ph-bold ph-identification-badge text-brand-600 dark:text-brand-400 text-sm"></i>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span id="profile-user-id" class="font-mono text-sm font-bold text-brand-700 dark:text-brand-400 tracking-wider">#------</span>
+                            <button onclick="copyPilotId()" class="text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 text-xs font-mono font-bold" title="Copy ID">
+                                <i class="ph-bold ph-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Email Address -->
+                    <div class="p-3.5 rounded-2xl bg-slate-100/80 dark:bg-white/5 border border-slate-200/80 dark:border-white/5 truncate">
+                        <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 text-[10px] font-mono font-bold uppercase tracking-wider mb-1">
+                            <span>Mail Address</span>
+                            <i class="ph-bold ph-envelope text-brand-600 dark:text-brand-400 text-sm"></i>
+                        </div>
+                        <p id="profile-mail-id" class="text-xs font-semibold text-slate-800 dark:text-slate-200 truncate">
+                            N/A
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Common Groups Section -->
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-mono font-bold uppercase text-slate-500 dark:text-slate-400 tracking-wider flex items-center gap-1.5">
+                            <i class="ph-bold ph-users-three text-brand-600 dark:text-brand-400 text-sm"></i> Common Groups
+                        </span>
+                        <span id="common-groups-count" class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-slate-200 dark:bg-white/10 text-slate-600 dark:text-slate-300">0 Shared</span>
+                    </div>
+
+                    <div id="common-groups-list" class="space-y-2 max-h-48 overflow-y-auto profile-scroll pr-1">
+                        <div class="p-4 rounded-2xl bg-slate-100/80 dark:bg-white/5 border border-dashed border-slate-300 dark:border-white/10 text-center">
+                            <p class="text-xs text-slate-500">Checking shared squad memberships...</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { 
+            getFirestore, 
+            collection, 
+            doc, 
+            getDoc, 
+            getDocs,
+            setDoc,
+            deleteDoc
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        const APP_ID = typeof __app_id !== 'undefined' ? __app_id : 'pulse-relay-core';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' 
+            ? JSON.parse(__firebase_config) 
+            : {
+                apiKey: "AIzaSyB3CuxOTGTIcfkuRUrmQSLhYgmM5fs8oiA",
+                authDomain: "telementry-core.firebaseapp.com",
+                projectId: "telementry-core",
+                storageBucket: "telementry-core.firebasestorage.app",
+                messagingSenderId: "383674921170",
+                appId: "1:383674921170:web:6494651de6757df5c0fd0b"
+            };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let currentAuthUser = null;
+        let targetPilotData = null;
+        let isBlocked = false;
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const targetQuery = urlParams.get('uid') || urlParams.get('code') || urlParams.get('id');
+
+        window.toggleThemeMode = () => {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem('pulse-theme-mode', isDark ? 'dark' : 'light');
+            showToast(isDark ? "Dark Mode active" : "Crisp Light Mode active");
+        };
+
+        const PALETTE_THEMES = [
+            { id: 'violet', name: 'Cosmic Violet', color: '#7c3aed' },
+            { id: 'pink',   name: 'Cyber Pink',    color: '#ec4899' },
+            { id: 'red',    name: 'Crimson Nova',  color: '#ef4444' },
+            { id: 'green',  name: 'Emerald Matrix',color: '#10b981' },
+            { id: 'blue',   name: 'Ocean Cyan',    color: '#06b6d4' },
+            { id: 'amber',  name: 'Solar Amber',   color: '#f59e0b' }
+        ];
+
+        window.toggleColorPalettePopover = () => {
+            const popover = document.getElementById('profile-palette-popover');
+            if (!popover) return;
+            const isClosed = popover.classList.contains('hidden');
+            if (isClosed) {
+                renderPaletteChoices();
+                popover.classList.remove('hidden');
+            } else {
+                popover.classList.add('hidden');
+            }
+        };
+
+        function renderPaletteChoices() {
+            const container = document.getElementById('profile-palette-choices-list');
+            if (!container) return;
+            const current = document.documentElement.getAttribute('data-color') || 'violet';
+            
+            container.innerHTML = PALETTE_THEMES.map(t => {
+                const isActive = t.id === current;
+                return `
+                    <button onclick="setColorTheme('${t.id}')" class="w-full flex items-center justify-between p-2 rounded-xl text-xs font-semibold transition-all ${isActive ? 'bg-brand-500/20 text-slate-900 dark:text-white font-bold' : 'hover:bg-slate-100 dark:hover:bg-white/5 text-slate-600 dark:text-slate-300'}">
+                        <div class="flex items-center gap-2.5">
+                            <span class="w-3.5 h-3.5 rounded-full shadow-sm flex-shrink-0" style="background-color: ${t.color}"></span>
+                            <span>${t.name}</span>
+                        </div>
+                        ${isActive ? '<i class="ph-bold ph-check text-brand-600 dark:text-brand-400 text-xs"></i>' : ''}
+                    </button>
+                `;
+            }).join('');
+        }
+
+        window.setColorTheme = (themeId) => {
+            document.documentElement.setAttribute('data-color', themeId);
+            localStorage.setItem('pulse-color-theme', themeId);
+            renderPaletteChoices();
+            const popover = document.getElementById('profile-palette-popover');
+            if (popover) popover.classList.add('hidden');
+            
+            const themeObj = PALETTE_THEMES.find(t => t.id === themeId);
+            showToast(`${themeObj ? themeObj.name : themeId} theme active`);
+        };
+
+        // Close palette popover on outside click
+        window.addEventListener('click', (e) => {
+            const popover = document.getElementById('profile-palette-popover');
+            const btn = document.getElementById('btn-profile-palette');
+            if (popover && !popover.classList.contains('hidden')) {
+                if (!popover.contains(e.target) && !btn?.contains(e.target)) {
+                    popover.classList.add('hidden');
+                }
+            }
+        });
+
+        onAuthStateChanged(auth, async (user) => {
+            currentAuthUser = user;
+            if (targetQuery) {
+                await loadPilotProfile(targetQuery);
+            } else if (user) {
+                await loadPilotProfile(user.uid);
+            } else {
+                showLoggedOutState();
+            }
+        });
+
+        async function loadPilotProfile(queryId) {
+            try {
+                let foundUserDoc = null;
+                const cleanQuery = queryId.trim().toLowerCase().replace(/^#/, '');
+
+                const directRef = doc(db, 'artifacts', APP_ID, 'public', 'data', 'users_directory', queryId);
+                const directSnap = await getDoc(directRef);
+
+                if (directSnap.exists()) {
+                    foundUserDoc = directSnap.data();
+                } else {
+                    const usersSnap = await getDocs(collection(db, 'artifacts', APP_ID, 'public', 'data', 'users_directory'));
+                    usersSnap.forEach(d => {
+                        const u = d.data();
+                        if ((u.pilotCode || '').toLowerCase() === cleanQuery || (u.email || '').toLowerCase() === cleanQuery) {
+                            foundUserDoc = u;
+                        }
+                    });
+                }
+
+                if (foundUserDoc) {
+                    targetPilotData = foundUserDoc;
+                    renderProfile(foundUserDoc);
+                    if (currentAuthUser) {
+                        checkBlockStatus(currentAuthUser.uid, foundUserDoc.uid);
+                        fetchCommonGroups(currentAuthUser.uid, foundUserDoc.uid);
+                    }
+                } else {
+                    showPilotNotFound(queryId);
+                }
+            } catch(e) {
+                console.warn("Profile load notice:", e);
+                showPilotNotFound(queryId);
+            }
+        }
+
+        function renderProfile(user) {
+            const isMe = currentAuthUser && currentAuthUser.uid === user.uid;
+            const displayName = user.displayName || 'Pilot ' + (user.pilotCode || 'Unknown');
+            const mailId = user.email || (user.isAnonymous ? 'Guest Pilot' : 'Private');
+            const code = user.pilotCode || '------';
+            const letter = displayName.charAt(0).toUpperCase();
+
+            document.getElementById('profile-display-name').innerText = displayName;
+            document.getElementById('profile-handle').innerText = `@${code.toLowerCase()}`;
+            document.getElementById('profile-mail-id').innerText = mailId;
+            document.getElementById('profile-user-id').innerText = `#${code}`;
+            
+            const avatar = document.getElementById('profile-avatar');
+            avatar.innerText = letter;
+
+            const defaultBio = user.bio || "✨ Member of Pulse Relay\n💬 Real-time Communication & Messaging\n📍 Active Community Member";
+            document.getElementById('profile-bio-text').innerText = defaultBio;
+
+            const bioLink = user.website || `pulserelay.mesh/${code.toLowerCase()}`;
+            const linkElem = document.getElementById('profile-bio-link');
+            linkElem.innerText = bioLink.replace(/^https?:\/\//, '');
+            linkElem.href = bioLink.startsWith('http') ? bioLink : `https://${bioLink}`;
+
+            const dmBtnText = document.getElementById('dm-btn-text');
+            const blockBtn = document.getElementById('btn-block-toggle');
+            if (isMe) {
+                if (dmBtnText) dmBtnText.innerText = "Back to Messenger";
+                if (blockBtn) blockBtn.classList.add('hidden');
+            } else {
+                if (dmBtnText) dmBtnText.innerText = "Send Transmission";
+                if (blockBtn) blockBtn.classList.remove('hidden');
+            }
+        }
+
+        function showLoggedOutState() {
+            document.getElementById('profile-display-name').innerText = "Session Required";
+            document.getElementById('profile-handle').innerText = "@unauthenticated";
+            document.getElementById('profile-mail-id').innerText = "Sign in to view";
+            document.getElementById('profile-user-id').innerText = "#------";
+            
+            const avatar = document.getElementById('profile-avatar');
+            avatar.innerHTML = `<i class="ph-bold ph-lock-key text-3xl"></i>`;
+
+            document.getElementById('profile-bio-text').innerText = "You are currently logged out.\nPlease sign in to Pulse Relay to view your pilot dossier, squad rosters, and conversation threads.";
+
+            const linkElem = document.getElementById('profile-bio-link');
+            if (linkElem) {
+                linkElem.innerText = "pulserelay.mesh/auth";
+                linkElem.href = "index.html?auth=true";
+            }
+
+            const dmBtn = document.getElementById('btn-dm-user');
+            const dmBtnText = document.getElementById('dm-btn-text');
+            const blockBtn = document.getElementById('btn-block-toggle');
+            
+            if (dmBtnText) dmBtnText.innerText = "Sign In to Pulse Relay";
+            if (dmBtn) dmBtn.onclick = () => { window.location.href = "index.html?auth=true"; };
+            if (blockBtn) blockBtn.classList.add('hidden');
+
+            const statusText = document.getElementById('user-status-text');
+            const statusDot = document.getElementById('user-status-indicator');
+            if (statusText) statusText.innerText = "Logged Out";
+            if (statusDot) statusDot.className = "w-2 h-2 rounded-full bg-amber-400";
+
+            const container = document.getElementById('common-groups-list');
+            if (container) {
+                container.innerHTML = `
+                    <div class="p-3.5 rounded-2xl bg-slate-100/80 dark:bg-white/5 border border-dashed border-slate-300 dark:border-white/10 text-center">
+                        <p class="text-xs text-slate-500">Sign in to sync your squads.</p>
+                    </div>`;
+            }
+        }
+
+        function showPilotNotFound(query = '') {
+            const clean = query.replace(/^#/, '');
+            document.getElementById('profile-display-name').innerText = "Pilot Not Found";
+            document.getElementById('profile-handle').innerText = `@${clean.toLowerCase() || 'unknown'}`;
+            document.getElementById('profile-mail-id').innerText = "N/A";
+            document.getElementById('profile-user-id').innerText = `#${clean.toUpperCase() || '------'}`;
+            
+            const avatar = document.getElementById('profile-avatar');
+            avatar.innerText = "?";
+
+            document.getElementById('profile-bio-text').innerText = `No pilot dossier was found matching ID or callsign "${clean}".`;
+            
+            const dmBtnText = document.getElementById('dm-btn-text');
+            const dmBtn = document.getElementById('btn-dm-user');
+            const blockBtn = document.getElementById('btn-block-toggle');
+            if (dmBtnText) dmBtnText.innerText = "Back to Messenger";
+            if (dmBtn) dmBtn.onclick = () => goBackToMainApp();
+            if (blockBtn) blockBtn.classList.add('hidden');
+        }
+
+        async function fetchCommonGroups(myUid, targetUid) {
+            const container = document.getElementById('common-groups-list');
+            const countBadge = document.getElementById('common-groups-count');
+
+            try {
+                const groupsSnap = await getDocs(collection(db, 'artifacts', APP_ID, 'public', 'data', 'account_groups'));
+                const shared = [];
+
+                groupsSnap.forEach(docSnap => {
+                    const data = docSnap.data();
+                    const members = data.members || [];
+                    if (members.includes(myUid) && members.includes(targetUid)) {
+                        shared.push({ id: docSnap.id, ...data });
+                    }
+                });
+
+                countBadge.innerText = `${shared.length} Shared`;
+
+                if (shared.length === 0) {
+                    container.innerHTML = `
+                        <div class="p-3.5 rounded-2xl bg-slate-100/80 dark:bg-white/5 border border-dashed border-slate-300 dark:border-white/10 text-center">
+                            <p class="text-xs text-slate-500">No common squad groups shared with this pilot.</p>
+                        </div>`;
+                    return;
+                }
+
+                container.innerHTML = '';
+                shared.forEach(group => {
+                    const item = document.createElement('div');
+                    item.className = "flex items-center justify-between p-3 rounded-2xl bg-slate-100/80 dark:bg-white/5 border border-slate-200/80 dark:border-white/10";
+                    item.innerHTML = `
+                        <div class="flex items-center gap-2.5 truncate">
+                            <div class="w-8 h-8 rounded-xl bg-brand-500/20 text-brand-600 dark:text-brand-400 flex items-center justify-center flex-shrink-0">
+                                <i class="ph-fill ph-users-three text-base"></i>
+                            </div>
+                            <div class="truncate">
+                                <p class="text-xs font-bold text-slate-900 dark:text-white truncate">${escapeHTML(group.name)}</p>
+                                <p class="text-[10px] text-slate-500 dark:text-slate-400 truncate">${group.description || (group.members.length + ' members')}</p>
+                            </div>
+                        </div>
+                        <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded-md bg-slate-200 dark:bg-white/10 text-slate-600 dark:text-slate-300 flex-shrink-0">Shared</span>
+                    `;
+                    container.appendChild(item);
+                });
+            } catch(e) {
+                console.warn("Notice fetching common groups:", e);
+            }
+        }
+
+        async function checkBlockStatus(myUid, targetUid) {
+            try {
+                const blockRef = doc(db, 'artifacts', APP_ID, 'public', 'data', 'blocked_users', `${myUid}_${targetUid}`);
+                const blockSnap = await getDoc(blockRef);
+                isBlocked = blockSnap.exists();
+                updateBlockUI(isBlocked);
+            } catch(e) {
+                console.warn("Block status check notice:", e);
+            }
+        }
+
+        window.toggleBlockUser = async () => {
+            if (!targetPilotData) return;
+            if (!currentAuthUser) {
+                showToast("Please sign in to manage block settings.", true);
+                return;
+            }
+
+            const myUid = currentAuthUser.uid;
+            const targetUid = targetPilotData.uid;
+            const blockRef = doc(db, 'artifacts', APP_ID, 'public', 'data', 'blocked_users', `${myUid}_${targetUid}`);
+
+            try {
+                if (isBlocked) {
+                    await deleteDoc(blockRef);
+                    isBlocked = false;
+                    showToast(`Unblocked ${targetPilotData.displayName}`);
+                } else {
+                    await setDoc(blockRef, {
+                        blockedBy: myUid,
+                        blockedUser: targetUid,
+                        timestamp: Date.now()
+                    });
+                    isBlocked = true;
+                    showToast(`Blocked ${targetPilotData.displayName}.`);
+                }
+                updateBlockUI(isBlocked);
+            } catch(e) {
+                console.error("Block action failed:", e);
+                showToast("Could not update block status.", true);
+            }
+        };
+
+        function updateBlockUI(blocked) {
+            const btn = document.getElementById('btn-block-toggle');
+            const icon = document.getElementById('block-icon');
+            const btnText = document.getElementById('block-btn-text');
+            const badge = document.getElementById('blocked-badge');
+            if (!btn) return;
+
+            if (blocked) {
+                badge?.classList.remove('hidden');
+                btn.className = "px-4 py-2.5 rounded-xl text-xs font-bold transition-all bg-rose-600 text-white hover:bg-rose-700 flex items-center justify-center gap-1.5 shadow-md shadow-rose-600/20 active:scale-95";
+                icon.className = "ph-bold ph-check text-sm";
+                btnText.innerText = "Blocked";
+            } else {
+                badge?.classList.add('hidden');
+                btn.className = "px-4 py-2.5 rounded-xl text-xs font-bold transition-all border border-rose-200 dark:border-rose-900/50 bg-rose-50 dark:bg-rose-950/30 text-rose-600 dark:text-rose-400 hover:bg-rose-600 hover:text-white dark:hover:bg-rose-600 flex items-center justify-center gap-1.5 active:scale-95";
+                icon.className = "ph-bold ph-prohibit text-sm";
+                btnText.innerText = "Block";
+            }
+        }
+
+        window.startDirectChat = () => {
+            if (!targetPilotData) {
+                window.location.href = `index.html`;
+                return;
+            }
+            if (currentAuthUser && currentAuthUser.uid === targetPilotData.uid) {
+                window.location.href = `index.html`;
+                return;
+            }
+            const code = targetPilotData.pilotCode || targetPilotData.uid;
+            window.location.href = `index.html?dm=${encodeURIComponent(code)}`;
+        };
+
+        window.goBackToMainApp = () => {
+            window.location.href = `index.html`;
+        };
+
+        window.copyPilotId = () => {
+            if (!targetPilotData) return;
+            const text = targetPilotData.pilotCode || targetPilotData.uid;
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            showToast(`Pilot ID #${text} copied to clipboard!`);
+        };
+
+        function showToast(msg, isError = false) {
+            const toast = document.createElement('div');
+            const bg = isError ? 'bg-rose-600 text-white' : 'bg-slate-900 dark:bg-[#201438] text-white border border-slate-700 dark:border-brand-500/40 shadow-xl';
+            const icon = isError ? 'ph-warning-circle' : 'ph-check-circle text-brand-400';
+
+            toast.className = `fixed top-6 left-1/2 transform -translate-x-1/2 ${bg} px-4 py-2.5 rounded-2xl shadow-2xl z-[300] transition-opacity duration-300 opacity-0 flex items-center gap-2.5 text-xs font-semibold max-w-sm w-11/12`;
+            toast.innerHTML = `<i class="ph-bold ${icon} text-lg flex-shrink-0"></i> <span class="leading-snug truncate">${escapeHTML(msg)}</span>`;
+
+            document.body.appendChild(toast);
+            setTimeout(() => toast.classList.remove('opacity-0'), 20);
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+                setTimeout(() => toast.remove(), 250);
+            }, 3500);
+        }
+
+        function escapeHTML(str) {
+            const p = document.createElement('p');
+            p.appendChild(document.createTextNode(str));
+            return p.innerHTML;
+        }
+    </script>
+</body>
+</html>
