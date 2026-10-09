@@ -2,7 +2,7 @@
 <html lang="en" class="dark" data-color="violet">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Pilot Profile — Pulse Relay</title>
     
     <!-- External Dependencies: Tailwind CSS & Phosphor Icons -->
@@ -137,6 +137,7 @@
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif;
             transition: background 0.3s ease, color 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .dark body {
@@ -152,7 +153,7 @@
             background: linear-gradient(135deg, var(--banner-grad-1) 0%, var(--banner-grad-2) 50%, var(--banner-grad-3) 100%);
         }
 
-        .profile-scroll::-webkit-scrollbar { width: 5px; }
+        .profile-scroll::-webkit-scrollbar { width: 4px; }
         .profile-scroll::-webkit-scrollbar-track { background: transparent; }
         .profile-scroll::-webkit-scrollbar-thumb { background-color: rgba(255, 255, 255, 0.15); border-radius: 9999px; }
         html:not(.dark) .profile-scroll::-webkit-scrollbar-thumb { background-color: rgb(var(--brand-600-rgb) / 0.2); }
@@ -183,7 +184,6 @@
             }
         };
 
-        // Bootstrap theme mode immediately
         const savedTheme = localStorage.getItem('pulse-theme-mode') || 'dark';
         if (savedTheme === 'dark') {
             document.documentElement.classList.add('dark');
@@ -191,7 +191,6 @@
             document.documentElement.classList.remove('dark');
         }
 
-        // Bootstrap color palette immediately
         const savedColor = localStorage.getItem('pulse-color-theme') || 'violet';
         document.documentElement.setAttribute('data-color', savedColor);
     </script>
@@ -199,17 +198,12 @@
 <body class="min-h-screen flex flex-col antialiased select-none">
 
     <!-- Top Navigation Header -->
-    <header class="w-full bg-white/75 dark:bg-[#150d26]/80 backdrop-blur-md border-b border-slate-200/80 dark:border-white/5 h-16 flex items-center px-4 sm:px-8 justify-between sticky top-0 z-50 transition-colors">
-        <div class="flex items-center gap-3">
-            <button onclick="goBackToMainApp()" class="p-2 rounded-xl text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-white/10 transition-colors" title="Back to Chat Hub">
-                <i class="ph-bold ph-arrow-left text-xl"></i>
+    <header class="w-full bg-white/80 dark:bg-[#150d26]/85 backdrop-blur-md border-b border-slate-200/80 dark:border-white/5 h-16 flex items-center px-3 sm:px-8 justify-between sticky top-0 z-50 transition-colors">
+        <div class="flex items-center gap-2 sm:gap-3">
+            <button onclick="goBackToMainApp()" class="p-2 -ml-1 rounded-xl text-brand-600 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300 hover:bg-brand-500/10 transition-all flex items-center gap-1 font-bold text-xs sm:text-sm active:scale-95" title="Back to Chat Hub">
+                <i class="ph-bold ph-arrow-left text-lg sm:text-xl"></i>
+                <span>Messenger</span>
             </button>
-            <div class="flex items-center gap-2.5 cursor-pointer" onclick="goBackToMainApp()">
-                <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-brand-700 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-brand-700/30">
-                    <i class="ph-fill ph-broadcast text-lg"></i>
-                </div>
-                <span class="font-extrabold text-base tracking-tight text-slate-900 dark:text-white">Pulse<span class="text-brand-600 dark:text-brand-400">Relay</span></span>
-            </div>
         </div>
 
         <div class="flex items-center gap-2">
@@ -235,24 +229,22 @@
                             <i class="ph-bold ph-x"></i>
                         </button>
                     </div>
-                    <div class="space-y-1" id="profile-palette-choices-list">
-                        <!-- Populated via JavaScript -->
-                    </div>
+                    <div class="space-y-1" id="profile-palette-choices-list"></div>
                 </div>
             </div>
 
-            <button onclick="goBackToMainApp()" class="px-3.5 py-1.5 rounded-xl bg-brand-500/10 dark:bg-white/10 hover:bg-brand-500/20 dark:hover:bg-white/15 text-xs font-bold text-slate-800 dark:text-white transition-all flex items-center gap-1.5 border border-brand-500/20 dark:border-white/10">
+            <button onclick="goBackToMainApp()" class="px-3 sm:px-3.5 py-1.5 rounded-xl bg-brand-500/10 dark:bg-white/10 hover:bg-brand-500/20 dark:hover:bg-white/15 text-xs font-bold text-slate-800 dark:text-white transition-all flex items-center gap-1.5 border border-brand-500/20 dark:border-white/10 active:scale-95">
                 <i class="ph-fill ph-chat-circle-dots text-brand-600 dark:text-brand-400 text-sm"></i>
-                <span>Open Messenger</span>
+                <span class="hidden sm:inline">Open Chat</span>
             </button>
         </div>
     </header>
 
-    <main class="flex-grow flex items-center justify-center p-4 sm:p-6 md:p-8">
-        <div class="bg-white/90 dark:bg-[#160e26]/90 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 rounded-[32px] shadow-2xl max-w-lg w-full overflow-hidden transition-all relative">
+    <main class="flex-grow flex items-center justify-center p-3 sm:p-6 md:p-8">
+        <div class="bg-white/90 dark:bg-[#160e26]/90 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 rounded-3xl sm:rounded-[32px] shadow-2xl max-w-lg w-full overflow-hidden transition-all relative">
             
             <!-- Banner Cover with Dynamic Palette Gradient -->
-            <div class="h-36 sm:h-44 profile-banner-grad relative overflow-hidden transition-colors">
+            <div class="h-32 sm:h-44 profile-banner-grad relative overflow-hidden transition-colors">
                 <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.18),transparent)]"></div>
                 <div class="absolute inset-0 bg-black/25"></div>
                 
@@ -263,13 +255,13 @@
             </div>
 
             <!-- Profile Content Body -->
-            <div class="px-6 pb-6 relative">
+            <div class="px-4 sm:px-6 pb-6 relative">
                 
-                <!-- Centered Profile Avatar -->
-                <div class="flex justify-center -mt-16 sm:-mt-20 mb-3 relative z-20">
+                <!-- Centered Profile Avatar (Image or Stylized Initial) -->
+                <div class="flex justify-center -mt-14 sm:-mt-20 mb-3 relative z-20">
                     <div class="relative">
                         <div class="p-1 bg-white dark:bg-[#160e26] rounded-full shadow-2xl">
-                            <div id="profile-avatar" class="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-gradient-to-tr from-brand-700 via-brand-800 to-indigo-800 text-white font-extrabold text-4xl sm:text-5xl flex items-center justify-center uppercase shadow-inner ring-4 ring-brand-500/30 transition-all">
+                            <div id="profile-avatar" class="w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden bg-gradient-to-tr from-brand-700 via-brand-800 to-indigo-800 text-white font-extrabold text-3xl sm:text-5xl flex items-center justify-center uppercase shadow-inner ring-4 ring-brand-500/30 transition-all">
                                 ?
                             </div>
                         </div>
@@ -282,14 +274,14 @@
                 <!-- Centered Name & Callsign -->
                 <div class="text-center mb-4">
                     <div class="flex items-center justify-center gap-1.5">
-                        <h1 id="profile-display-name" class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">Loading Pilot...</h1>
-                        <i class="ph-fill ph-seal-check text-brand-600 dark:text-brand-400 text-xl" title="Verified Pilot"></i>
+                        <h1 id="profile-display-name" class="text-lg sm:text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">Loading Pilot...</h1>
+                        <i class="ph-fill ph-seal-check text-brand-600 dark:text-brand-400 text-lg sm:text-xl" title="Verified Pilot"></i>
                     </div>
                     <p id="profile-handle" class="text-xs font-mono font-semibold text-slate-500 dark:text-slate-400 mt-0.5">@pilot_code</p>
                 </div>
 
                 <!-- Bio Summary Card -->
-                <div class="mb-5 bg-slate-100/80 dark:bg-white/5 border border-slate-200/80 dark:border-white/5 rounded-2xl p-4 text-center">
+                <div class="mb-5 bg-slate-100/80 dark:bg-white/5 border border-slate-200/80 dark:border-white/5 rounded-2xl p-3.5 sm:p-4 text-center">
                     <p id="profile-bio-text" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 whitespace-pre-line leading-relaxed font-medium">
                         ✨ Member of Pulse Relay
                         💬 Real-time Communication & Messaging
@@ -303,37 +295,37 @@
                 </div>
 
                 <!-- Direct Action Buttons Row -->
-                <div class="flex items-center justify-center gap-2.5 mb-6">
-                    <button onclick="startDirectChat()" id="btn-dm-user" class="flex-1 py-2.5 px-4 bg-black hover:bg-neutral-800 text-white rounded-xl text-xs font-bold transition-all shadow-md shadow-black/40 border border-white/15 flex items-center justify-center gap-2 active:scale-95">
+                <div class="flex items-center justify-center gap-2 sm:gap-2.5 mb-5 sm:mb-6">
+                    <button onclick="startDirectChat()" id="btn-dm-user" class="flex-1 py-2.5 px-4 bg-black hover:bg-neutral-800 text-white rounded-xl text-xs sm:text-sm font-bold transition-all shadow-md shadow-black/40 border border-white/15 flex items-center justify-center gap-2 active:scale-95">
                         <i class="ph-bold ph-paper-plane-tilt text-sm"></i>
                         <span id="dm-btn-text">Send Transmission</span>
                     </button>
                     
-                    <button onclick="toggleBlockUser()" id="btn-block-toggle" class="px-4 py-2.5 rounded-xl text-xs font-bold transition-all border border-rose-200 dark:border-rose-900/50 bg-rose-50 dark:bg-rose-950/30 text-rose-600 dark:text-rose-400 hover:bg-rose-600 hover:text-white dark:hover:bg-rose-600 flex items-center justify-center gap-1.5 active:scale-95">
+                    <button onclick="toggleBlockUser()" id="btn-block-toggle" class="px-3.5 sm:px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all border border-rose-200 dark:border-rose-900/50 bg-rose-50 dark:bg-rose-950/30 text-rose-600 dark:text-rose-400 hover:bg-rose-600 hover:text-white dark:hover:bg-rose-600 flex items-center justify-center gap-1.5 active:scale-95">
                         <i id="block-icon" class="ph-bold ph-prohibit text-sm"></i>
                         <span id="block-btn-text">Block</span>
                     </button>
                 </div>
 
                 <!-- Grid Details: Pilot ID & Mail Address -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 mb-5 sm:mb-6">
                     
                     <!-- 6-Digit Pilot ID -->
-                    <div class="p-3.5 rounded-2xl bg-slate-100/80 dark:bg-white/5 border border-slate-200/80 dark:border-white/5">
+                    <div class="p-3 sm:p-3.5 rounded-2xl bg-slate-100/80 dark:bg-white/5 border border-slate-200/80 dark:border-white/5">
                         <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 text-[10px] font-mono font-bold uppercase tracking-wider mb-1">
                             <span>Pilot ID</span>
                             <i class="ph-bold ph-identification-badge text-brand-600 dark:text-brand-400 text-sm"></i>
                         </div>
                         <div class="flex items-center justify-between">
-                            <span id="profile-user-id" class="font-mono text-sm font-bold text-brand-700 dark:text-brand-400 tracking-wider">#------</span>
-                            <button onclick="copyPilotId()" class="text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 text-xs font-mono font-bold" title="Copy ID">
+                            <span id="profile-user-id" class="font-mono text-xs sm:text-sm font-bold text-brand-700 dark:text-brand-400 tracking-wider">#------</span>
+                            <button onclick="copyPilotId()" class="text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 text-xs font-mono font-bold p-1" title="Copy ID">
                                 <i class="ph-bold ph-copy"></i>
                             </button>
                         </div>
                     </div>
 
                     <!-- Email Address -->
-                    <div class="p-3.5 rounded-2xl bg-slate-100/80 dark:bg-white/5 border border-slate-200/80 dark:border-white/5 truncate">
+                    <div class="p-3 sm:p-3.5 rounded-2xl bg-slate-100/80 dark:bg-white/5 border border-slate-200/80 dark:border-white/5 truncate">
                         <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 text-[10px] font-mono font-bold uppercase tracking-wider mb-1">
                             <span>Mail Address</span>
                             <i class="ph-bold ph-envelope text-brand-600 dark:text-brand-400 text-sm"></i>
@@ -346,15 +338,15 @@
 
                 <!-- Common Groups Section -->
                 <div>
-                    <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center justify-between mb-2.5">
                         <span class="text-xs font-mono font-bold uppercase text-slate-500 dark:text-slate-400 tracking-wider flex items-center gap-1.5">
-                            <i class="ph-bold ph-users-three text-brand-600 dark:text-brand-400 text-sm"></i> Common Groups
+                            <i class="ph-bold ph-users-three text-brand-600 dark:text-brand-400 text-sm"></i> Common Squads
                         </span>
                         <span id="common-groups-count" class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-slate-200 dark:bg-white/10 text-slate-600 dark:text-slate-300">0 Shared</span>
                     </div>
 
                     <div id="common-groups-list" class="space-y-2 max-h-48 overflow-y-auto profile-scroll pr-1">
-                        <div class="p-4 rounded-2xl bg-slate-100/80 dark:bg-white/5 border border-dashed border-slate-300 dark:border-white/10 text-center">
+                        <div class="p-3.5 rounded-2xl bg-slate-100/80 dark:bg-white/5 border border-dashed border-slate-300 dark:border-white/10 text-center">
                             <p class="text-xs text-slate-500">Checking shared squad memberships...</p>
                         </div>
                     </div>
@@ -457,7 +449,6 @@
             showToast(`${themeObj ? themeObj.name : themeId} theme active`);
         };
 
-        // Close palette popover on outside click
         window.addEventListener('click', (e) => {
             const popover = document.getElementById('profile-palette-popover');
             const btn = document.getElementById('btn-profile-palette');
@@ -493,7 +484,9 @@
                     const usersSnap = await getDocs(collection(db, 'artifacts', APP_ID, 'public', 'data', 'users_directory'));
                     usersSnap.forEach(d => {
                         const u = d.data();
-                        if ((u.pilotCode || '').toLowerCase() === cleanQuery || (u.email || '').toLowerCase() === cleanQuery) {
+                        if ((u.pilotCode || '').toLowerCase() === cleanQuery || 
+                            (u.email || '').toLowerCase() === cleanQuery || 
+                            (u.uid || '').toLowerCase() === cleanQuery) {
                             foundUserDoc = u;
                         }
                     });
@@ -528,7 +521,13 @@
             document.getElementById('profile-user-id').innerText = `#${code}`;
             
             const avatar = document.getElementById('profile-avatar');
-            avatar.innerText = letter;
+            const photoUrl = user.customPhotoUrl || user.photoURL || '';
+
+            if (photoUrl && !photoUrl.startsWith('data:text')) {
+                avatar.innerHTML = `<img src="${photoUrl}" alt="${escapeHTML(displayName)}" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerText='${letter}';">`;
+            } else {
+                avatar.innerText = letter;
+            }
 
             const defaultBio = user.bio || "✨ Member of Pulse Relay\n💬 Real-time Communication & Messaging\n📍 Active Community Member";
             document.getElementById('profile-bio-text').innerText = defaultBio;
@@ -709,12 +708,12 @@
 
             if (blocked) {
                 badge?.classList.remove('hidden');
-                btn.className = "px-4 py-2.5 rounded-xl text-xs font-bold transition-all bg-rose-600 text-white hover:bg-rose-700 flex items-center justify-center gap-1.5 shadow-md shadow-rose-600/20 active:scale-95";
+                btn.className = "px-3.5 sm:px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all bg-rose-600 text-white hover:bg-rose-700 flex items-center justify-center gap-1.5 shadow-md shadow-rose-600/20 active:scale-95";
                 icon.className = "ph-bold ph-check text-sm";
                 btnText.innerText = "Blocked";
             } else {
                 badge?.classList.add('hidden');
-                btn.className = "px-4 py-2.5 rounded-xl text-xs font-bold transition-all border border-rose-200 dark:border-rose-900/50 bg-rose-50 dark:bg-rose-950/30 text-rose-600 dark:text-rose-400 hover:bg-rose-600 hover:text-white dark:hover:bg-rose-600 flex items-center justify-center gap-1.5 active:scale-95";
+                btn.className = "px-3.5 sm:px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all border border-rose-200 dark:border-rose-900/50 bg-rose-50 dark:bg-rose-950/30 text-rose-600 dark:text-rose-400 hover:bg-rose-600 hover:text-white dark:hover:bg-rose-600 flex items-center justify-center gap-1.5 active:scale-95";
                 icon.className = "ph-bold ph-prohibit text-sm";
                 btnText.innerText = "Block";
             }
@@ -734,20 +733,17 @@
         };
 
         window.goBackToMainApp = () => {
-            window.location.href = `index.html`;
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                window.location.href = `index.html`;
+            }
         };
 
         window.copyPilotId = () => {
             if (!targetPilotData) return;
             const text = targetPilotData.pilotCode || targetPilotData.uid;
-            const ta = document.createElement('textarea');
-            ta.value = text;
-            ta.style.position = 'fixed';
-            ta.style.opacity = '0';
-            document.body.appendChild(ta);
-            ta.select();
-            document.execCommand('copy');
-            document.body.removeChild(ta);
+            navigator.clipboard.writeText(text);
             showToast(`Pilot ID #${text} copied to clipboard!`);
         };
 
@@ -756,7 +752,7 @@
             const bg = isError ? 'bg-rose-600 text-white' : 'bg-slate-900 dark:bg-[#201438] text-white border border-slate-700 dark:border-brand-500/40 shadow-xl';
             const icon = isError ? 'ph-warning-circle' : 'ph-check-circle text-brand-400';
 
-            toast.className = `fixed top-6 left-1/2 transform -translate-x-1/2 ${bg} px-4 py-2.5 rounded-2xl shadow-2xl z-[300] transition-opacity duration-300 opacity-0 flex items-center gap-2.5 text-xs font-semibold max-w-sm w-11/12`;
+            toast.className = `fixed top-4 sm:top-6 left-1/2 transform -translate-x-1/2 ${bg} px-4 py-2.5 rounded-2xl shadow-2xl z-[300] transition-opacity duration-300 opacity-0 flex items-center gap-2.5 text-xs font-semibold max-w-sm w-11/12`;
             toast.innerHTML = `<i class="ph-bold ${icon} text-lg flex-shrink-0"></i> <span class="leading-snug truncate">${escapeHTML(msg)}</span>`;
 
             document.body.appendChild(toast);
@@ -769,7 +765,7 @@
 
         function escapeHTML(str) {
             const p = document.createElement('p');
-            p.appendChild(document.createTextNode(str));
+            p.appendChild(document.createTextNode(str || ''));
             return p.innerHTML;
         }
     </script>
